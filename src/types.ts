@@ -1,5 +1,19 @@
-export type Commodity = 'Electricity' | 'Hydrogen' | 'Heat' | 'Gas';
-export type TradeType = 'buy' | 'sell';
+export enum Commodity {
+  ELECTRICITY = "Electricity",
+  HYDROGEN = "Hydrogen",
+  HEAT = "Heat",
+  GAS = "Gas"
+}
+
+export enum TradeType {
+  BUY = "buy",
+  SELL = "sell"
+}
+
+export enum TradeStatus {
+  COMPLETED = "Completed",
+  PENDING = "Pending"
+}
 
 export interface Amount {
   value: number;
@@ -13,7 +27,7 @@ export interface Price {
 
 export interface ResourceState {
   commodity: Commodity;
-  status: 'surplus' | 'deficit';
+  status: "surplus" | "deficit";
   amount: Amount;
 }
 
@@ -25,12 +39,12 @@ export interface Company {
 }
 
 export interface Trade {
-  id?: string;
+  id: string;
   commodity: Commodity;
   type: TradeType;
   amount: Amount;
   price: Price;
-  status: 'Pending' | 'Completed';
+  status: TradeStatus;
   time?: string;
   requester_company: string;
   fulfiller_company?: string;

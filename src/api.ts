@@ -1,4 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
 import type { Company, Trade } from './types';
+
 
 const API_URL = 'http://localhost:8000';
 
@@ -25,12 +27,37 @@ export const api = {
   },
 
   async createTrade(trade: Trade) {
-    const endpoint = trade.type === 'sell' ? 'offer' : 'request';
-    const response = await fetch(`${API_URL}/trades/${endpoint}`, {
+    console.log(trade);
+    const tradeWithId = {
+      ...trade,
+      id: uuidv4(),
+      time: new Date().toISOString(),
+    };
+    const response = await fetch(`${API_URL}/trades`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(trade),
+      body: JSON.stringify(tradeWithId),
     });
     return response.json();
   },
+
+  async getOffers() {
+    const response = await fetch(`${API_URL}/trades/offers`);
+    return response.json();
+  },
+
+  async getRequests() {
+    const response = await fetch(`${API_URL}/trades/requests`);
+    return response.json();
+  },
+
+  async getTradeHistory() {
+    const response = await fetch(`${API_URL}/trades/history`);
+    return response.json();
+  },
+
+  async getCompany(name: string) {
+    const response = await fetch(`${API_URL}/companies/${name}`);
+    return response.json();
+  }
 };

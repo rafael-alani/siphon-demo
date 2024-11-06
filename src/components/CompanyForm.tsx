@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Building2, X } from 'lucide-react';
-import type { Company, ResourceState, Commodity } from '../types';
+import React, { useState } from 'react';
+import type { Commodity, Company, ResourceState } from '../types';
 
 interface CompanyFormProps {
   onSubmit: (company: Company) => void;

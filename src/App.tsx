@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Building2, Plus, Trash2, ArrowDownToLine, ArrowUpToLine } from 'lucide-react';
+import { ArrowDownToLine, ArrowUpToLine, Building2, Plus, Trash2 } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { api } from './api';
 import { CompanyForm } from './components/CompanyForm';
 import { TradeForm } from './components/TradeForm';
-import { api } from './api';
 import type { Company, Trade } from './types';
 
 function App() {
