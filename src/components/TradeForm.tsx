@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { ArrowLeftRight, X } from 'lucide-react';
-import type { Trade, Company } from '../types';
+import React, { useState } from 'react';
+import type { Company, Trade } from '../types';
 
 interface TradeFormProps {
   type: 'buy' | 'sell';
@@ -84,11 +84,19 @@ export function TradeForm({ type, companies, onSubmit, onClose }: TradeFormProps
               <div className="mt-1 flex rounded-md shadow-sm">
                 <input
                   type="number"
-                  value={trade.amount.value}
+                  value={trade.amount.value === 0 ? '' : trade.amount.value}
                   onChange={(e) => setTrade({
                     ...trade,
-                    amount: { ...trade.amount, value: Number(e.target.value) }
+                    amount: { ...trade.amount, value: e.target.value === '' ? 0 : Number(e.target.value) }
                   })}
+                  onBlur={(e) => {
+                    if (e.target.value === '') {
+                      setTrade({
+                        ...trade,
+                        amount: { ...trade.amount, value: 0 }
+                      });
+                    }
+                  }}
                   className="block w-full rounded-l-md border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
                   required
                 />
@@ -99,15 +107,23 @@ export function TradeForm({ type, companies, onSubmit, onClose }: TradeFormProps
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Price</label>
+              <label className="block text-sm font-medium text-gray-700">Price per unit</label>
               <div className="mt-1 flex rounded-md shadow-sm">
                 <input
                   type="number"
-                  value={trade.price.value}
+                  value={trade.price.value === 0 ? '' : trade.price.value}
                   onChange={(e) => setTrade({
                     ...trade,
-                    price: { ...trade.price, value: Number(e.target.value) }
+                    price: { ...trade.price, value: e.target.value === '' ? 0 : Number(e.target.value) }
                   })}
+                  onBlur={(e) => {
+                    if (e.target.value === '') {
+                      setTrade({
+                        ...trade,
+                        price: { ...trade.price, value: 0 }
+                      });
+                    }
+                  }}
                   className="block w-full rounded-l-md border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
                   required
                 />
