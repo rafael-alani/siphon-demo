@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import type { Company, Trade } from './types';
 
 
-const API_URL = 'http://localhost:8000';
+const API_URL = 'https://siphon-backend.fly.dev';
 
 export const api = {
   async createCompany(company: Company) {
